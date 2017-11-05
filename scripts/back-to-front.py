@@ -50,7 +50,7 @@ with open("suburbia.pk", "rb") as pk:
 
     suburbia.county_to_zip = {county:id_to_zip[id] for county,id in county_to_fid.items()}
     print(suburbia.nested_dictionary)
-    print(suburbia.county_to_zip)
+    #print(suburbia.county_to_zip)
     ages = 'C:\\Users\czhao\Documents\Technica\data\\COUNTY_ZIP_092017.csv'
     with open(ages) as csvFile:
         csvReader = csv.reader(csvFile)
