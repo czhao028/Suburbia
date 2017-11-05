@@ -1,6 +1,7 @@
 from processdata import Suburbia
 import csv
 import pickle
+from collections import defaultdict
 """
 -Adds rentindex to each county
 -county to zipcode
@@ -20,26 +21,36 @@ with open("suburbia.pk", "rb") as pk:
             except:
                 continue
     #county to zip code
-    with open('C:\\Users\czhao\Documents\Technica\data\\all-geocodes-v2016.csv') as csvFile:
+    with open('C:\\Users\czhao\Documents\Technica\data\\national_county.csv') as csvFile:
         county_to_fid = dict()
-        lines = csvFile.read().splitlines()
-        for i,line in enumerate(lines):
-            if i < 5:
-                continue
-            l = line.split(",")
-            id, county = l[2], l[6]
+        lines = csv.reader(csvFile)
+        for line in lines:
+            id, county = line[2], line[3]
             county_to_fid[county] = id
-    with open('C:\\Users\czhao\Documents\Technica\data\\COUNTY_ZIP_092017.csv') as csvFile1:
-        csvReader = csv.reader(csvFile1)
-        fid_to_zip = dict()
-        for row in csvReader:
-            try:
-                fid_to_zip[row[0]].append(row[1])
-            except:
-                fid_to_zip[row[0]] = row[1]
+    # with open('C:\\Users\czhao\Documents\Technica\data\\COUNTY_ZIP_092017.csv') as csvFile1:
+    #     csvReader = csv.reader(csvFile1)
+    #     fid_to_zip = dict()
+    #     for row in csvReader:
+    #         try:
+    #             fid_to_zip[row[0]].append(row[1])
+    #         except:
+    #             fid_to_zip[row[0]] = row[1]
     #county: list[of county ids]
-    suburbia.county_to_zip = {county:fid_to_zip[fid] for county,fid in county_to_fid.items()}
+    #suburbia.county_to_zip = {county:fid_to_zip[fid] for county,fid in county_to_fid.items()}
     # adds kids, <18, seniors to Suburbia object
+    # county to zip
+    county_zip = 'C:\\Users\czhao\Documents\Technica\data\\zcta_county_rel_10.csv'
+    id_to_zip = defaultdict(list)
+    with open(county_zip) as ct:
+        lines = csv.reader(ct)
+        for i,line in enumerate(lines):
+            if i > 0:
+                zip,county =line[0],line[2]
+                id_to_zip[county].append(zip)
+
+    suburbia.county_to_zip = {county:id_to_zip[id] for county,id in county_to_fid.items()}
+    print(suburbia.nested_dictionary)
+    print(suburbia.county_to_zip)
     ages = 'C:\\Users\czhao\Documents\Technica\data\\COUNTY_ZIP_092017.csv'
     with open(ages) as csvFile:
         csvReader = csv.reader(csvFile)
