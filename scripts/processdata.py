@@ -18,8 +18,8 @@ class Suburbia:
             for row in csvReader:
                 self.ua_to_zip[row[0]] = row[2]
     def read_urban(self):
-        urban = 'C:\\Users\czhao\Downloads\data\\ua_list_ua.csv'
-        urb_cluster = 'C:\\Users\czhao\Downloads\data\\ua_list_uc.csv'
+        urban = 'C:\\Users\czhao\Documents\Technica\data\\ua_list_ua.csv'
+        urb_cluster = 'C:\\Users\czhao\Documents\Technica\data\\ua_list_uc.csv'
         with open(urban) as csv1:
             csvReader = csv.reader(csv1)
             for row in csvReader:
@@ -42,7 +42,7 @@ class Suburbia:
         csv1.close()
         csv2.close()
     def read_transit(self):
-        stops = 'C:\\Users\czhao\Downloads\google_transit\stops.txt'
+        stops = 'C:\\Users\czhao\Documents\Technica\google_transit\stops.txt'
         s = open(stops,"r")
         count = 0
         arr = s.read().splitlines()
