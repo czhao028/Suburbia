@@ -2,12 +2,18 @@ var j = {'66843': {'zindex': '192500', 'urban?': 'rural'}, '66705': {'zindex': '
 var score = 0
 function score_urban(urban){
     for(ele in j){
-        if (ele["urban?"]==urban){
+        if (ele["urban?"]===urban){
             score+=1
         }
     }
 }
 
 function filter_rent_buy(home){
+    returning = {}
+    for(ele in j){
+        if(ele["urban?"]===home){
+            returning.
+        }
+    }
     return Object.values(j).find
 }
